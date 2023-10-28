@@ -42,6 +42,7 @@ export class BasicPageComponent implements OnInit {
 
     if ( !this.myForm.controls[field] ) return null;
 
+    // If it isn't comming then return Empty Object
     const errors = this.myForm.controls[field].errors || {};
 
     for (const key of Object.keys(errors) ) {

@@ -23,6 +23,7 @@ export class DynamicPageComponent {
   constructor( private fb: FormBuilder ) {}
 
   get favoriteGames() {
+    // We need to specify that this is a FormArray an then we can iterate through it.
     return this.myForm.get('favoriteGames') as FormArray;
   }
 
@@ -32,6 +33,7 @@ export class DynamicPageComponent {
       && this.myForm.controls[field].touched;
   }
 
+  // Here  we are going to be working with a FormArray
   isValidFieldInArray( formArray: FormArray, index: number ) {
     return formArray.controls[index].errors
         && formArray.controls[index].touched;
@@ -60,13 +62,18 @@ export class DynamicPageComponent {
   onAddToFavorites():void {
 
     if ( this.newFavorite.invalid ) return;
+
     const newGame = this.newFavorite.value;
 
+    // Here it is without "Form Builder"
     // this.favoriteGames.push(  new FormControl( newGame, Validators.required ) );
+
+    // Here we are using the "Form Builder"
     this.favoriteGames.push(
       this.fb.control( newGame, Validators.required )
     );
 
+    // This will reset the field.
     this.newFavorite.reset();
 
   }
@@ -84,7 +91,9 @@ export class DynamicPageComponent {
     }
 
     console.log(this.myForm.value);
+    // Reset the Array favoriteGames control
     (this.myForm.controls['favoriteGames'] as FormArray ) = this.fb.array([]);
+    // Reset form
     this.myForm.reset();
 
   }

@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   templateUrl: './switches-page.component.html',
 })
+// We add the OnInit to be able to add ngOnInit()
 export class SwitchesPageComponent implements OnInit {
 
   public myForm: FormGroup = this.fb.group({
@@ -37,6 +38,8 @@ export class SwitchesPageComponent implements OnInit {
       return;
     }
 
+    // newPerson is going to have all the properties except "termsAndCondition"
+    // Here we want to exclude "termsAndCondition"
     const { termsAndConditions, ...newPerson } = this.myForm.value;
 
     this.person = newPerson;
